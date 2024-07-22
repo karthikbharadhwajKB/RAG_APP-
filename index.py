@@ -1,19 +1,29 @@
-import bs4
-from langchain_community.document_loaders.pdf import PyPDFLoader
+from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from utils import (load_document,
+                   split_document,
+                   get_embedding_model)
 
 ### Indexing ###
 
-# 1. Loading documents
+def ingest_docs(options):
 
-loader = PyPDFLoader(
-    file_path="sample_docs/1706.03762.pdf"
-)
+    # loading document
+    document = load_document(
+        path = options["path"], 
+        doc_type=options["doc_type"]
+        )
 
-# loading docs 
-docs = loader.load()
-
-# 2. Splitting documents into Chunks
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-)
+    # splitting document into chunks 
+    chunks = split_document(
+        document=document, 
+        chunk_size=options["chunk_size"], 
+        chunk_overlap=options["chunk_overlap"]
+        )
+    
+    # loading embeddings 
+    embedding_model = get_embedding_model(
+        provider=options["provider"], 
+        model_name=options["embed_model_name"]
+        )
