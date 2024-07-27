@@ -33,3 +33,4 @@ def get_embedding_model(provider, embed_model_name):
     else: 
         print("Provider is not supported...!")
     
+
