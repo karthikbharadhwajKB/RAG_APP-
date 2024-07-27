@@ -5,25 +5,24 @@ from utils import (load_document,
                    split_document,
                    get_embedding_model)
 
-### Indexing ###
-
 def ingest_docs(options):
+    """
+    Ingest documents into vector store. 
 
-    # loading document
-    document = load_document(
-        path = options["path"], 
-        doc_type=options["doc_type"]
-        )
+    Loads documents from file system.
+    split the whole document into chunks. 
+    embed the chunks. 
+    stores them into vector store. 
 
-    # splitting document into chunks 
-    chunks = split_document(
-        document=document, 
-        chunk_size=options["chunk_size"], 
-        chunk_overlap=options["chunk_overlap"]
-        )
+    Args: 
+        - options: dictionary 
+
+    Returns: 
+        - None 
+
+    Raises: 
+        - None
+
+    """
     
-    # loading embeddings 
-    embedding_model = get_embedding_model(
-        provider=options["provider"], 
-        model_name=options["embed_model_name"]
-        )
+
