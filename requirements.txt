@@ -6,3 +6,4 @@ pydantic
 langchain-community 
 faiss-cpu 
 tiktoken
+python-dotenv
